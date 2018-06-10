@@ -1,4 +1,5 @@
 ﻿using System;
+using Lab_04_Tic_Tac_Toe.Classes;
 
 namespace Lab_04_Tic_Tac_Toe
 {
