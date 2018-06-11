@@ -7,7 +7,14 @@ namespace Lab_04_Tic_Tac_Toe
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello World!");         
+        }
+
+        static void GamePlay()
+        {
+            GameBoard board = new GameBoard();
+            board.BoardDisplay(" ", " ");
+            
         }
     }
 }

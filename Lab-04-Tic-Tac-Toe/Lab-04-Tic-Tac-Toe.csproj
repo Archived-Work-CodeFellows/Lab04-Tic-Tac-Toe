@@ -6,8 +6,4 @@
     <RootNamespace>Lab_04_Tic_Tac_Toe</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
-
 </Project>
