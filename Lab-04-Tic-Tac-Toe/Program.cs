@@ -111,12 +111,12 @@ namespace Lab_04_Tic_Tac_Toe
                         Console.ReadLine();
                     }
                 }
-                catch (FormatException)
+                catch (FormatException) //Catches blank input
                 {
                     Console.WriteLine($"Nice try {current.Name}. I only except the numbers on the screen!");
                     Console.ReadLine();
                 }
-                catch (OverflowException)
+                catch (OverflowException) //Catches number inputs too large for type short
                 {
                     Console.WriteLine($"{current.Name}...are you even trying to play?");
                     Console.ReadLine();
