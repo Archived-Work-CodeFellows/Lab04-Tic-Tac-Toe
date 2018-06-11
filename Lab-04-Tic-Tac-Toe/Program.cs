@@ -116,6 +116,11 @@ namespace Lab_04_Tic_Tac_Toe
                     Console.WriteLine($"Nice try {current.Name}. I only except the numbers on the screen!");
                     Console.ReadLine();
                 }
+                catch (OverflowException)
+                {
+                    Console.WriteLine($"{current.Name}...are you even trying to play?");
+                    Console.ReadLine();
+                }
                 gameInstance.ActiveBoard.BoardDisplay(" ", " ");
             }
         }
