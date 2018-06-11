@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Lab_04_Tic_Tac_Toe.Classes
 {
+    /// <summary>
+    /// This class is responsible for board display and updating visuals.
+    /// It also keeps track of user inputs to ensure that a user can't
+    /// select the same spot as a previous turn
+    /// </summary>
     public class GameBoard
     {
         public string[,] Board { get; set; }
@@ -17,7 +22,12 @@ namespace Lab_04_Tic_Tac_Toe.Classes
                 { "7","8","9" }
             };
         }
-
+        /// <summary>
+        /// Method for checking if the position is available for selection
+        /// </summary>
+        /// <param name="position">User's selected position</param>
+        /// <param name="totalTurns">How many turns the game is at currently</param>
+        /// <returns>False if the position is unavailable, True if it is available</returns>
         public bool PositionChecker(string position, int totalTurns)
         {
            for(int i = 0; i < totalTurns+1; i++)
@@ -30,7 +40,11 @@ namespace Lab_04_Tic_Tac_Toe.Classes
             }
             return true;
         }
-
+        /// <summary>
+        /// Method responsible for visual updates to the board
+        /// </summary>
+        /// <param name="position">User's selected position</param>
+        /// <param name="marker">User's marker</param>
         public void BoardDisplay(string position, string marker)
         {
             Console.Clear();

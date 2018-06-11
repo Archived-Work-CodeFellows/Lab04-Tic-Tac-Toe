@@ -9,7 +9,10 @@ namespace Lab_04_Tic_Tac_Toe
         {
             AppMenu();
         }
-
+        /// <summary>
+        /// Method holds all the Menu interaction logic and calls appropriate
+        /// methods based on user input
+        /// </summary>
         static void AppMenu()
         {
             Console.WriteLine("Welcome to Tic-Tac-Toe, Three in a row!");
@@ -35,7 +38,10 @@ namespace Lab_04_Tic_Tac_Toe
             Console.Clear();
             Console.WriteLine("Okay maybe next time! bye!");
         }
-
+        /// <summary>
+        /// Method holds the GamePlay interaction visual logic. Helps
+        /// set up all instances that will be used for the current round
+        /// </summary>
         static void GamePlay()
         {
             Console.Clear();
@@ -61,7 +67,11 @@ namespace Lab_04_Tic_Tac_Toe
             else Console.WriteLine("Darn, no winners this time!");
 
         }
-
+        /// <summary>
+        /// Method for Game interaction. Keeps track of turns and whose turn
+        /// it is currently.
+        /// </summary>
+        /// <param name="gameInstance">Takes a Game object to affect all current references</param>
         static void ActiveGame(Game gameInstance)
         {
             int playerTurn = 0;
@@ -78,12 +88,12 @@ namespace Lab_04_Tic_Tac_Toe
                 Console.WriteLine("Pick a spot!");
 
                 string position = Console.ReadLine();
-
+                //To check if the user input is actually a number
                 try
                 {
                     short positionChecker = Int16.Parse(position);
                     bool taken = gameInstance.ActiveBoard.PositionChecker(position, totalTurns);
-
+                    //This is to remove negative possibilities and only accept 1-9 as input
                     if (taken && positionChecker * -1 < 10 && positionChecker > 0)
                     {
                         gameInstance.ActiveBoard.BoardDisplay(position, current.Marker);

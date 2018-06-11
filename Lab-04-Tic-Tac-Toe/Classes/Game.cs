@@ -4,14 +4,17 @@ using System.Text;
 
 namespace Lab_04_Tic_Tac_Toe.Classes
 {
+    /// <summary>
+    /// This Class holds the logic for overall Game Play
+    /// </summary>
     public class Game
     {
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
         public GameBoard ActiveBoard { get; set; }
         public string Win { get; set; }
-
-        readonly int[,] WinConditions = new int[,]
+        //This 2D array stores all win conditions 
+        int[,] WinConditions { get; } = new int[,]
         {
             {1,2,3},
             {4,5,6},
@@ -31,7 +34,12 @@ namespace Lab_04_Tic_Tac_Toe.Classes
             Player2 = playTwo;
             ActiveBoard = board;
         }
-
+        /// <summary>
+        /// Method that checks which player is active and changes
+        /// the reference accordingly
+        /// </summary>
+        /// <param name="turn">Takes an int that is 0 or 1</param>
+        /// <returns></returns>
         public Player WhoseTurn(int turn)
         {
             if(turn == 1)
@@ -40,7 +48,13 @@ namespace Lab_04_Tic_Tac_Toe.Classes
             }
             return Player1;
         }
-
+        /// <summary>
+        /// Inspired by lecture, Method checks to see if there is a winning
+        /// combination on the board. It stores the values from the WinConditions
+        /// 2D array and creates Coordinates. It then takes the value of those Coordinates
+        /// and compares if the three values from the Board indecies matches any conditions
+        /// </summary>
+        /// <returns>True if there is a match and changes the Player name reference, false if no winner at the time of calculation</returns>
         public bool IsWinner()
         {
            for(int i = 0; i < WinConditions.GetLength(0); i++)
