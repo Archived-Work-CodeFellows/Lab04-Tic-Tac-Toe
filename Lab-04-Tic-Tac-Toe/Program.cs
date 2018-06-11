@@ -39,6 +39,7 @@ namespace Lab_04_Tic_Tac_Toe
             string num2 = Console.ReadLine();
             Player player2 = new Player(num2, "O");
 
+            Game gameInstance = new Game(player1, player2);
             board.BoardDisplay(" ", " ");
 
         }
