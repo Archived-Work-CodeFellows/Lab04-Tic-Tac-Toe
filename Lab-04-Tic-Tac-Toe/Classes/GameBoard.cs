@@ -6,7 +6,7 @@ namespace Lab_04_Tic_Tac_Toe.Classes
 {
     public class GameBoard
     {
-        string[,] Board { get; set; }
+        public string[,] Board { get; }
 
         public GameBoard()
         {
@@ -19,6 +19,7 @@ namespace Lab_04_Tic_Tac_Toe.Classes
 
         public void BoardDisplay(string position, string marker)
         {
+            Console.Clear();
             for (int i = 0; i < Board.GetLength(0); i++)
             {
                 for(int j = 0; j < Board.GetLength(1); j++)

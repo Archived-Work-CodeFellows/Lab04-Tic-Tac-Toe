@@ -39,9 +39,25 @@ namespace Lab_04_Tic_Tac_Toe
             string num2 = Console.ReadLine();
             Player player2 = new Player(num2, "O");
 
+            Console.Write($"{player1.Name} {player1.Name}");
+            Console.WriteLine(" ");
+
             Game gameInstance = new Game(player1, player2);
             board.BoardDisplay(" ", " ");
 
+            int turn = 0;
+            while (true)
+            {
+                Player current = gameInstance.WhoseTurn(turn);
+                Console.WriteLine(" ");
+                Console.WriteLine($"It's your turn {current.Name}");
+                Console.WriteLine("Pick a spot!");
+
+                string position = Console.ReadLine();
+                board.BoardDisplay(position, current.Marker);
+
+                turn = turn  > 0 ? 0 : 1;
+            }
         }
     }
 }
