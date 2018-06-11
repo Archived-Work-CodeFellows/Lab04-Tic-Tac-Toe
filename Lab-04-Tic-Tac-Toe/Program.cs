@@ -7,7 +7,6 @@ namespace Lab_04_Tic_Tac_Toe
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             AppMenu();
         }
 
@@ -20,15 +19,18 @@ namespace Lab_04_Tic_Tac_Toe
 
             if (input == "yes" || input == "y")
             {
-                bool replay = true;
-                while (replay)
+                bool replay = false;
+                do
                 {
                     GamePlay();
 
                     Console.WriteLine("Play again? yes/no");
                     string playAgain = Console.ReadLine().ToLower();
-                    if (playAgain != "yes" || playAgain != "y")  replay = false;
-                }
+
+                    if (playAgain == "yes" || playAgain == "y") replay = true;
+                    else replay = false;
+
+                } while (replay);
             }
             Console.Clear();
             Console.WriteLine("Okay maybe next time! bye!");
@@ -45,12 +47,9 @@ namespace Lab_04_Tic_Tac_Toe
 
             Console.Clear();
 
-            Console.WriteLine("Player O, it is your turn.?");
+            Console.WriteLine("Player O, it is your turn.");
             string num2 = Console.ReadLine();
             Player player2 = new Player(num2, "O");
-
-            Console.Write($"{player1.Name} {player1.Name}");
-            Console.WriteLine(" ");
 
             Game gameInstance = new Game(player1, player2, board);
             board.BoardDisplay(" ", " ");
@@ -58,11 +57,9 @@ namespace Lab_04_Tic_Tac_Toe
             ActiveGame(gameInstance);
 
             Console.Clear();
-            if (gameInstance.IsWinner())
-            {
-                Console.WriteLine($"Yay you did it {gameInstance.Win}!");
-            }
-            Console.WriteLine("Darn, no winners this time!");
+            if (gameInstance.IsWinner()) Console.WriteLine($"Yay you did it {gameInstance.Win}!");
+            else Console.WriteLine("Darn, no winners this time!");
+
         }
 
         static void ActiveGame(Game gameInstance)
@@ -79,13 +76,24 @@ namespace Lab_04_Tic_Tac_Toe
                 Console.WriteLine("Pick a spot!");
 
                 string position = Console.ReadLine();
-                gameInstance.ActiveBoard.BoardDisplay(position, current.Marker);
 
-                bool check = gameInstance.IsWinner();
-                totalTurns = check ? 9 : totalTurns;
+                try
+                {
+                    int positionChecker = Int32.Parse(position);
+                    gameInstance.ActiveBoard.BoardDisplay(position, current.Marker);
 
-                playerTurn = playerTurn > 0 ? 0 : 1;
-                totalTurns++;
+                    bool check = gameInstance.IsWinner();
+                    totalTurns = check ? 9 : totalTurns;
+
+                    playerTurn = playerTurn > 0 ? 0 : 1;
+                    totalTurns++;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Nice try {current.Name}. I only except the numbers on the screen!");
+                    Console.ReadLine();
+                }
+                gameInstance.ActiveBoard.BoardDisplay(" ", " ");
             }
         }
     }

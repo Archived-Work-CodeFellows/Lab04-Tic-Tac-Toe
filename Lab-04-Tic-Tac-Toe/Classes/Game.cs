@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_04_Tic_Tac_Toe.Classes
 {
-    class Game
+    public class Game
     {
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }

@@ -6,7 +6,7 @@ namespace Lab_04_Tic_Tac_Toe.Classes
 {
     public class GameBoard
     {
-        public string[,] Board { get; }
+        public string[,] Board { get; set; }
 
         public GameBoard()
         {
@@ -22,12 +22,9 @@ namespace Lab_04_Tic_Tac_Toe.Classes
             Console.Clear();
             for (int i = 0; i < Board.GetLength(0); i++)
             {
-                for(int j = 0; j < Board.GetLength(1); j++)
+                for (int j = 0; j < Board.GetLength(1); j++)
                 {
-                    if(Board[i,j] == position)
-                    {
-                        Board[i, j] = marker;
-                    }
+                    if (Board[i, j] == position) Board[i, j] = marker;
                     Console.Write($"|{Board[i, j]}|");
                 }
                 Console.WriteLine(" ");

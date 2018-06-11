@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_04_Tic_Tac_Toe.Classes
 {
-    class Coordinates
+    public class Coordinates
     {
         public int Row { get; set; }
         public int Column { get; set; }
