@@ -7,6 +7,7 @@ namespace Lab_04_Tic_Tac_Toe.Classes
     public class GameBoard
     {
         public string[,] Board { get; set; }
+        public string[] TakenPositions { get; set; } = new string[9];
 
         public GameBoard()
         {
@@ -15,6 +16,19 @@ namespace Lab_04_Tic_Tac_Toe.Classes
                 { "4","5","6" },
                 { "7","8","9" }
             };
+        }
+
+        public bool PositionChecker(string position, int totalTurns)
+        {
+           for(int i = 0; i < totalTurns+1; i++)
+            {
+                if (TakenPositions[i] == position)
+                {
+                    return false;
+                }
+                else TakenPositions[i] = position;
+            }
+            return true;
         }
 
         public void BoardDisplay(string position, string marker)

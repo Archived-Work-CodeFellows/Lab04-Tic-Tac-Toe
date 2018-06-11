@@ -66,11 +66,13 @@ namespace Lab_04_Tic_Tac_Toe
         {
             int playerTurn = 0;
             int totalTurns = 0;
+            Player current = gameInstance.WhoseTurn(playerTurn);
+
             while (totalTurns < 9)
             {
+                Console.WriteLine(" ");
                 Console.WriteLine($"{gameInstance.Player1.Name} marker: {gameInstance.Player1.Marker}");
-                Console.WriteLine($"{gameInstance.Player2.Name} marker: {gameInstance.Player2.Marker}");
-                Player current = gameInstance.WhoseTurn(playerTurn);
+                Console.WriteLine($"{gameInstance.Player2.Name} marker: {gameInstance.Player2.Marker}");                
                 Console.WriteLine(" ");
                 Console.WriteLine($"It's your turn {current.Name}");
                 Console.WriteLine("Pick a spot!");
@@ -79,14 +81,25 @@ namespace Lab_04_Tic_Tac_Toe
 
                 try
                 {
-                    int positionChecker = Int32.Parse(position);
-                    gameInstance.ActiveBoard.BoardDisplay(position, current.Marker);
+                    short positionChecker = Int16.Parse(position);
+                    bool taken = gameInstance.ActiveBoard.PositionChecker(position, totalTurns);
 
-                    bool check = gameInstance.IsWinner();
-                    totalTurns = check ? 9 : totalTurns;
+                    if (taken && positionChecker * -1 < 10 && positionChecker > 0)
+                    {
+                        gameInstance.ActiveBoard.BoardDisplay(position, current.Marker);
 
-                    playerTurn = playerTurn > 0 ? 0 : 1;
-                    totalTurns++;
+                        bool check = gameInstance.IsWinner();
+                        totalTurns = check ? 9 : totalTurns;
+
+                        playerTurn = playerTurn > 0 ? 0 : 1;
+                        totalTurns++;
+                        current = gameInstance.WhoseTurn(playerTurn);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Try again {current.Name}!");
+                        Console.ReadLine();
+                    }
                 }
                 catch (FormatException)
                 {
