@@ -8,10 +8,10 @@ namespace Lab_04_Tic_Tac_Toe
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            MainMenu();
+            AppMenu();
         }
 
-        static void MainMenu()
+        static void AppMenu()
         {
             Console.WriteLine("Welcome to Tic-Tac-Toe, Three in a row!");
             Console.Write("\n\n");
@@ -20,13 +20,17 @@ namespace Lab_04_Tic_Tac_Toe
 
             if (input == "yes" || input == "y")
             {
-                GamePlay();
+                bool replay = true;
+                while (replay)
+                {
+                    replay = GamePlay();
+                }
             }
             Console.Clear();
             Console.WriteLine("Okay maybe next time! bye!");
         }
 
-        static void GamePlay()
+        static bool GamePlay()
         {
             Console.Clear();
             GameBoard board = new GameBoard();
@@ -35,6 +39,8 @@ namespace Lab_04_Tic_Tac_Toe
             string num1 = Console.ReadLine();
             Player player1 = new Player(num1, "X");
 
+            Console.Clear();
+
             Console.WriteLine("Player O, it is your turn.?");
             string num2 = Console.ReadLine();
             Player player2 = new Player(num2, "O");
@@ -42,21 +48,40 @@ namespace Lab_04_Tic_Tac_Toe
             Console.Write($"{player1.Name} {player1.Name}");
             Console.WriteLine(" ");
 
-            Game gameInstance = new Game(player1, player2);
+            Game gameInstance = new Game(player1, player2, board);
             board.BoardDisplay(" ", " ");
 
-            int turn = 0;
-            while (true)
+            ActiveGame(gameInstance);
+
+            Console.Clear();
+            Console.WriteLine($"Yay you did it {gameInstance.Win}!");
+            Console.WriteLine("You tic-tac-toe-ed! Play again? yes/no");
+            string input = Console.ReadLine().ToLower();
+            if (input == "yes" || input == "y") return true;
+            return false;
+        }
+
+        static void ActiveGame(Game gameInstance)
+        {
+            int playerTurn = 0;
+            int totalTurns = 0;
+            while (totalTurns < 9)
             {
-                Player current = gameInstance.WhoseTurn(turn);
+                Console.WriteLine($"{gameInstance.Player1.Name} marker: {gameInstance.Player1.Marker}");
+                Console.WriteLine($"{gameInstance.Player2.Name} marker: {gameInstance.Player2.Marker}");
+                Player current = gameInstance.WhoseTurn(playerTurn);
                 Console.WriteLine(" ");
                 Console.WriteLine($"It's your turn {current.Name}");
                 Console.WriteLine("Pick a spot!");
 
                 string position = Console.ReadLine();
-                board.BoardDisplay(position, current.Marker);
+                gameInstance.ActiveBoard.BoardDisplay(position, current.Marker);
 
-                turn = turn  > 0 ? 0 : 1;
+                bool check = gameInstance.IsWinner();
+                totalTurns = check ? 9 : totalTurns;
+
+                playerTurn = playerTurn > 0 ? 0 : 1;
+                totalTurns++;
             }
         }
     }

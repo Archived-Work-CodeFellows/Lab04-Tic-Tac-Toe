@@ -8,6 +8,8 @@ namespace Lab_04_Tic_Tac_Toe.Classes
     {
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
+        public GameBoard ActiveBoard { get; set; }
+        public string Win { get; set; }
 
         readonly int[,] WinConditions = new int[,]
         {
@@ -23,24 +25,11 @@ namespace Lab_04_Tic_Tac_Toe.Classes
             {3,5,7}
         };
 
-        public Game(Player playOne, Player playTwo)
+        public Game(Player playOne, Player playTwo, GameBoard board)
         {
             Player1 = playOne;
             Player2 = playTwo;
-        }
-
-        public bool IsWinner(GameBoard board, Player currentPlayer)
-        {
-            //for(int i = 0; i < board.Board.GetLength(0); i++)
-            //{
-            //    for(int j = 0; j < board.Board.GetLength(1); j++)
-            //    {
-            //        if( WinConditions[i,j] == i+1 && board.Board[i,j] == currentPlayer.Marker)
-
-            //    }
-            //}
-
-            return false;
+            ActiveBoard = board;
         }
 
         public Player WhoseTurn(int turn)
@@ -50,6 +39,27 @@ namespace Lab_04_Tic_Tac_Toe.Classes
                 return Player2;
             }
             return Player1;
+        }
+
+        public bool IsWinner()
+        {
+           for(int i = 0; i < WinConditions.GetLength(0); i++)
+            {
+                Coordinates iOne = Player.CoordinateNumber(WinConditions[i, 0]);
+                Coordinates iTwo = Player.CoordinateNumber(WinConditions[i, 1]);
+                Coordinates iThree = Player.CoordinateNumber(WinConditions[i, 2]);
+
+                string one = ActiveBoard.Board[iOne.Row, iOne.Column];
+                string two = ActiveBoard.Board[iTwo.Row, iTwo.Column];
+                string three = ActiveBoard.Board[iThree.Row, iThree.Column];
+
+                if(one == two && two == three)
+                {
+                    Win = (one == "X" ? Player1.Name : Player2.Name);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
