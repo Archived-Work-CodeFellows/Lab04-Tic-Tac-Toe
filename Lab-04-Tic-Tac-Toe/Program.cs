@@ -23,14 +23,18 @@ namespace Lab_04_Tic_Tac_Toe
                 bool replay = true;
                 while (replay)
                 {
-                    replay = GamePlay();
+                    GamePlay();
+
+                    Console.WriteLine("Play again? yes/no");
+                    string playAgain = Console.ReadLine().ToLower();
+                    if (playAgain != "yes" || playAgain != "y")  replay = false;
                 }
             }
             Console.Clear();
             Console.WriteLine("Okay maybe next time! bye!");
         }
 
-        static bool GamePlay()
+        static void GamePlay()
         {
             Console.Clear();
             GameBoard board = new GameBoard();
@@ -54,11 +58,11 @@ namespace Lab_04_Tic_Tac_Toe
             ActiveGame(gameInstance);
 
             Console.Clear();
-            Console.WriteLine($"Yay you did it {gameInstance.Win}!");
-            Console.WriteLine("You tic-tac-toe-ed! Play again? yes/no");
-            string input = Console.ReadLine().ToLower();
-            if (input == "yes" || input == "y") return true;
-            return false;
+            if (gameInstance.IsWinner())
+            {
+                Console.WriteLine($"Yay you did it {gameInstance.Win}!");
+            }
+            Console.WriteLine("Darn, no winners this time!");
         }
 
         static void ActiveGame(Game gameInstance)
