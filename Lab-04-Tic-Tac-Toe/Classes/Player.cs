@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Lab_04_Tic_Tac_Toe.Classes
 {
-    class Player
+    /// <summary>
+    /// This Class is to create a Player based on a given name and given marker
+    /// </summary>
+    public class Player
     {
         public string Name { get; set; }
         public string Marker { get; set; }
@@ -16,7 +19,13 @@ namespace Lab_04_Tic_Tac_Toe.Classes
             Name = name;
             Marker = marker;
         }
-
+        /// <summary>
+        /// Inspired by lecture, This method is used inconjunction with the
+        /// Game Class Win Conditions and supplies row and column values
+        /// for the 2D array
+        /// </summary>
+        /// <param name="position">Takes the value stored in WinConditions 2d array</param>
+        /// <returns>Coordinates Object with appropriate 2D array position values</returns>
         public static Coordinates CoordinateNumber(int position)
         {
             switch (position)
